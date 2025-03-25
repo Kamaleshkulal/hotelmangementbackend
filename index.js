@@ -14,6 +14,27 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Root route
+app.get('/', (req, res) => {
+  res.json({
+    success: true,
+    message: 'Welcome to Hotel Management System API',
+    version: '1.0.0',
+    status: 'Sucessfully running',
+    endpoints: {
+      auth: {
+        register: 'POST /api/v1/auth/register',
+        login: 'POST /api/v1/auth/login-initiate',
+        verifyLogin: 'POST /api/v1/auth/login-verify',
+        verifyEmail: 'GET /api/v1/auth/verify-email/:token',
+        resendVerification: 'POST /api/v1/auth/resend-verification',
+        forgotPassword: 'POST /api/v1/auth/forgot-password',
+        resetPassword: 'POST /api/v1/auth/reset-password'
+      }
+    }
+  });
+});
+
 // Health check route
 app.get('/api/health', (req, res) => {
   res.status(200).json({
